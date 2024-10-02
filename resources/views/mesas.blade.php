@@ -5,7 +5,7 @@
     <!-- Panel de control header -->
     <div class="row">
         <div class="col-12 mb-4 text-center">
-            <h1 class="display-4">Panel de Control - Mesas</h1>
+            <h1 class="display-4">Panel - Mesas</h1>
         </div>
     </div>
 

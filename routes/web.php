@@ -14,6 +14,11 @@ Route::get('/panel', function () {
     return view('panel');
 });
 
+Route::get('/feedback', function () {
+    return view('feedback');
+});
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
