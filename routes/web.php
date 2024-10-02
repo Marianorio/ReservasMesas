@@ -10,6 +10,10 @@ Route::get('/mesas', function () {
     return view('mesas');
 });
 
+Route::get('/panel', function () {
+    return view('panel');
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
