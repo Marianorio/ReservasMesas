@@ -1,11 +1,10 @@
 <x-guest-layout>
     <div class="bg-cover bg-center min-vh-100 d-flex justify-content-center align-items-center" style="background-image: url('{{ asset('images/restaurant_fondo.jpg') }}'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-        <x-authentication-card>
-            <x-slot name="logo">
-                <div class="d-flex justify-content-center">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-50 h-50">
-                </div>
-            </x-slot>
+        <div class="bg-light p-4 rounded shadow col-md-4">
+            <!-- Muestra el logo directamente aquí -->
+            <div class="d-flex justify-content-center mb-3">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-50 h-50"> 
+            </div>
 
             <x-validation-errors class="mb-4" />
 
@@ -15,7 +14,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('login') }}" class="bg-light p-4 rounded shadow">
+            <form method="POST" action="{{ route('login') }}">
                 @csrf
 
                 <div class="mb-3">
@@ -51,6 +50,6 @@
                     </button>
                 </div>
             </form>
-        </x-authentication-card>
+        </div>
     </div>
 </x-guest-layout>
