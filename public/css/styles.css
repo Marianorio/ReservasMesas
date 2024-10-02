@@ -358,7 +358,35 @@
     color: var(--color-yellow);
     transform: scale(1.5);
   }
-  
+
+  .mesa {
+    position: relative;
+    overflow: hidden; /* Asegura que el overlay no salga de la card */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    z-index: 1; /* Coloca el overlay sobre el contenido de la card */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.mesa:hover .overlay {
+    opacity: 1; /* El efecto de desvanecimiento */
+}
+
+.card-body {
+  position: relative;
+  z-index: 0; /* Asegura que el contenido de la card esté por debajo del overlay */
+}
   
   /* Estilos responsive */
   @media (max-width: 767px) {
