@@ -18,6 +18,10 @@ Route::get('/feedback', function () {
     return view('feedback');
 });
 
+Route::get('/feedback-cliente', function () {
+    return view('feedback-cliente');
+});
+
 
 Route::middleware([
     'auth:sanctum',
