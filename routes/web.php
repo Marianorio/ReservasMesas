@@ -1,13 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\MesaComponent;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/mesas', MesaComponent::class)->name('mesas.index');
 
-Route::get('/mesas', function () {
-    return view('mesas');
+ Route::get('/', function () {
+     return view('welcome');
 });
 
 Route::get('/panel', function () {
