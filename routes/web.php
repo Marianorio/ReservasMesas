@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+/* 
 Route::get('/mesas', function () {
     return view('mesas');
 });
@@ -16,7 +16,7 @@ Route::get('/panel', function () {
 
 Route::get('/feedback', function () {
     return view('feedback');
-});
+}); */
 
 
 Route::middleware([
@@ -27,4 +27,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/mesas', function () {
+        return view('mesas');
+    })->name('mesas');
+    Route::get('/panel', function () {
+        return view('panel');
+    })->name('panel');
+
 });
