@@ -1,27 +1,36 @@
-@include('layouts.includes.head')
-@include('layouts.includes.navbar')
+<div class="container my-5">
+    <div class="mb-4">
+    
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h1 class="display-4">Panel - Usuarios</h1>
+        </div>
+    </div>
 
-<div class="container mx-auto my-10">
-    <div class="mb-5">
-        <h4 class="text-gray-600 text-lg font-semibold">Próximas Reservas</h4>
-        <div class="shadow-md rounded-lg overflow-hidden mt-3">
-            <table class="min-w-full table-auto">
-                <thead class="bg-gray-800 text-white">
+        <div class="table-responsive shadow-sm rounded-lg mt-3">
+            <!-- Botón para añadir nuevo usuario (puedes descomentarlo si tienes la lógica para añadir usuarios) -->
+            <!-- 
+            <button wire:click="register" class="btn btn-success mb-3">Nuevo Usuario</button>
+            -->
+            
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
                     <tr>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Usuario</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Rol</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Correo</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Acciones</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col" class="text-center">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td class="px-6 py-4">{{$user->id}}</td>
-                            <td class="px-6 py-4">{{$user->name}}</td>
-                            <td class="px-6 py-4">{{$user->email}}</td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900 text-sm">Ver Detalles</a>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td class="text-center">
+                                <!-- Botón para eliminar usuario -->
+                                <button wire:click="borrar({{ $user->id }})" class="btn btn-danger">Eliminar</button>
                             </td>
                         </tr>
                     @endforeach
@@ -30,5 +39,3 @@
         </div>
     </div>
 </div>
-
-@include('layouts.includes.footer')

@@ -7,7 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/panel">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="/dashboard">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Usuarios</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/mesas">Mesas</a>
@@ -25,10 +28,6 @@
         <li class="nav-item">
           <a class="nav-link" href="/feedback">Reseñas</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users">Usuarios</a>
-        </li>
-
         <li class="nav-item">
           <a class="nav-link" href="/feedback-cliente">Mis Reseñas</a>
         </li>
@@ -61,12 +60,6 @@
         @endauth
 
       </ul>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Cuenta</a></li>
-          <li><a class="dropdown-item" href="#">Rol:</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Salir</a></li>
-        </ul>
     </div>
   </div>
 </nav>
