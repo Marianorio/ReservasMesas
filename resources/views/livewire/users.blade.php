@@ -5,7 +5,7 @@
         <h4 class="text-gray-600 text-lg font-semibold">Gestion de Usuarios</h4>
         <div class="shadow-md rounded-lg overflow-hidden mt-3">
 
-          <button wire:click="register" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">Nuevo Usuario</button>
+          <!--<button wire:/>*click="register" */class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">Nuevo Usuario</button> -->
             
 
             <table class="min-w-full table-auto">
@@ -24,7 +24,7 @@
                             <td class="px-6 py-4">{{$user->name}}</td>
                             <td class="px-6 py-4">{{$user->email}}</td>
                             <td class="border px-4 py-2 text-center">
-                              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
+                              <!--<button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>-->
                               <button wire:click="borrar({{$user->id}})" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4">Eliminar</button>
                           </td>
                         </tr>
