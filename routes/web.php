@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Usuarios;
+use App\Livewire\Users;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +24,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/users', App\Livewire\Users::class);
+    Route::get('/users', Users::class);
 });
 
 Route::middleware([
