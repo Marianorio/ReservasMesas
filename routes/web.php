@@ -3,9 +3,26 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservaController;
 
-Route::get('/', function () {
-    return view('welcome');
+use App\Livewire\MesaComponent;
+Route::get('/mesas', MesaComponent::class)->name('mesas.index');
+
+
+ Route::get('/', function () {
+     return view('welcome');
 });
+
+Route::get('/panel', function () {
+    return view('panel');
+});
+
+Route::get('/feedback', function () {
+    return view('feedback');
+});
+
+Route::get('/feedback-cliente', function () {
+    return view('feedback-cliente');
+});
+
 
 
 

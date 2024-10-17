@@ -26,6 +26,37 @@
           <a class="nav-link" href="/feedback">Reseñas</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link" href="/feedback-cliente">Mis Reseñas</a>
+        </li>
+
+        @auth
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- Mostrando el nombre del usuario autenticado -->
+            {{ Auth::user()->name }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <!-- Enlace para Editar Perfil -->
+            <li>
+              <a class="dropdown-item" href="{{ route('profile.show') }}">Editar Perfil</a>
+            </li>
+
+            <!-- Formulario para Cerrar Sesión -->
+            <li>
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                   this.closest('form').submit();">
+                  Cerrar Sesión
+                </a>
+              </form>
+            </li>
+          </ul>
+        </li>
+        @endauth
+
       </ul>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">Cuenta</a></li>
