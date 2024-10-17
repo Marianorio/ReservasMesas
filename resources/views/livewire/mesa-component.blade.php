@@ -23,7 +23,7 @@
     </div>
 
     <!-- Tabla de Mesas -->
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover" id="tablaResenas">
         <thead class="table-dark">
             <tr>
                 <th>#</th>
@@ -130,3 +130,7 @@
 
 
 </div>
+
+
+<script src="{{ asset('js/busquedaMesas.js') }}"></script>
+
