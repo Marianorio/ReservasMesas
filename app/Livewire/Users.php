@@ -11,6 +11,6 @@ class Users extends Component
     public function render()
     {
         $this->users = User::all();
-        return view('livewire.users');
+        return view('livewire.users')->layout('layouts.app');
     }
 }

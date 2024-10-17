@@ -19,8 +19,12 @@ Route::get('/feedback', function () {
     return view('feedback');
 });
 
-Route::get('/users', function () {
-    return view('users');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/users', App\Livewire\Users::class);
 });
 
 Route::middleware([
