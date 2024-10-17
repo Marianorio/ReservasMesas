@@ -25,6 +25,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/feedback">Reseñas</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Usuarios</a>
+        </li>
 
       </ul>
         <ul class="dropdown-menu">

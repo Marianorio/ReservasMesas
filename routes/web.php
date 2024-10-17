@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Usuarios;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +19,9 @@ Route::get('/feedback', function () {
     return view('feedback');
 });
 
+Route::get('/users', function () {
+    return view('users');
+});
 
 Route::middleware([
     'auth:sanctum',
@@ -25,6 +29,9 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('panel');
     })->name('dashboard');
 });
+
+
+
