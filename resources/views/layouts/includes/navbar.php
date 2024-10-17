@@ -17,9 +17,9 @@
             Reservas
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Reservar</a></li>
+            <li><a class="dropdown-item" href="">Reservar</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Ver reservas</a></li>
+            <li><a class="dropdown-item" href="/reservas">Ver reservas</a></li>
           </ul>
         </li>
         <li class="nav-item">

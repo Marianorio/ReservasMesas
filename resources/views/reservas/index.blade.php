@@ -34,7 +34,7 @@
                     <i class="bi bi-check-circle text-success" style="font-size: 2rem;"></i>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" class="btn btn-outline-primary">Reservar</a>
+                    <a href="/reservas-crear" class="btn btn-outline-primary">Reservar</a>
                 </div>
             </div>
         </div>
