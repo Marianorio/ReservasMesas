@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\MesaComponent;
 
 Route::get('/mesas', MesaComponent::class)->name('mesas.index');
+use App\Livewire\Usuarios;
 
  Route::get('/', function () {
      return view('welcome');
@@ -29,6 +30,6 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('panel');
     })->name('dashboard');
 });
