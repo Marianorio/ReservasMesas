@@ -10,7 +10,25 @@ class MesaComponent extends Component
     public $mesas, $mesaId, $numero, $capacidad, $disponibilidad = 'disponible', $comentarios;
     public $isCreateModalOpen = 0;
     public $isEditModalOpen = 0;
+    public $selectedStatus = 'todas';
 
+    public function mount()
+    {
+        // Cargar todas las mesas por defecto
+        $this->mesas = Mesa::all();
+    }
+
+    public function filter($status)
+    {
+        $this->selectedStatus = $status;
+
+        // Filtrar las mesas por el estado seleccionado
+        if ($status === 'todas') {
+            $this->mesas = Mesa::all();
+        } else {
+            $this->mesas = Mesa::where('disponibilidad', $status)->get();
+        }
+    }
     // Renderizar todas las mesas
     public function render()
     {

@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ReservaController;
 
 use App\Livewire\MesaComponent;
+
+use App\Livewire\ReservaComponent;
+
+
 Route::get('/mesas', MesaComponent::class)->name('mesas.index');
 
 
@@ -18,10 +21,15 @@ Route::get('/panel', function () {
 Route::get('/feedback', function () {
     return view('feedback');
 });
+Route::get('/panel', function (){
+    return view(view: 'panel');
+})->name('panel');
 
 Route::get('/feedback-cliente', function () {
     return view('feedback-cliente');
 });
+
+
 
 
 
@@ -31,18 +39,13 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/panel', function () {
-        return view('panel');
-    })->name('panel');
+
+    Route::get('/reservas', ReservaComponent::class)->name('reservas');
+    Route::post('/reservas-insertar', [ReservaComponent::class, 'insertar']);
+    
 
 
-    Route::get('/reservas', [ReservaController::class, 'index']
-    )->name('reservas.index');
 
-    Route::get('/reservas-crear', [ReservaController::class, 'crear']
-    )->name('reservas.crear');
 
-    Route::post('/reservas', [ReservaController::class, 'store']
-    )->name('reservas.store');
 
 });
