@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class MesaComponent extends Component
 {
-    public $mesas, $mesaId, $numero, $capacidad, $disponibilidad = 'disponible', $comentarios;
+    public $mesas, $nro_mesa, $capacidad, $disponibilidad = 'disponible', $comentarios;
     public $isCreateModalOpen = 0;
     public $isEditModalOpen = 0;
     public $selectedStatus = 'todas';
@@ -49,85 +49,43 @@ class MesaComponent extends Component
         $this->isCreateModalOpen = false;
     }
 
-    // Abrir y cerrar modales de edición
-    public function abrirEditModal($id)
+    public function abrirEditModal($numero_mesas)
     {
         $this->resetInputFields();
-        $this->mesaId = $id;
-        $this->loadMesaData($id);
+        $this->nro_mesa = $numero_mesas;
+        $this->loadMesaData($numero_mesas);
         $this->isEditModalOpen = true;
     }
-
-    public function cerrarEditModal()
+    
+    private function loadMesaData($numero_mesas)
     {
-        $this->resetInputFields();
-        $this->isEditModalOpen = false;
-    }
-
-    // Cargar los datos de la mesa para editar
-    private function loadMesaData($id)
-    {
-        $mesa = Mesa::findOrFail($id);
-        $this->numero = $mesa->numero_mesas;
+        $mesa = Mesa::findOrFail($numero_mesas);
         $this->capacidad = $mesa->cantidad_asientos;
         $this->comentarios = $mesa->comentarios;
     }
-
-    // Reseteo de campos
-    private function resetInputFields()
-    {
-        $this->mesaId = null;
-        $this->numero = '';
-        $this->capacidad = '';
-        $this->comentarios = '';
-    }
-
-    // Guardar una nueva mesa
-    public function store()
-    {
-        $this->validate([
-            'numero' => 'required',
-            'capacidad' => 'required|numeric',
-            'comentarios' => 'nullable|string',
-        ]);
-
-        Mesa::create([
-            'numero_mesas' => $this->numero,
-            'cantidad_asientos' => $this->capacidad,
-            'disponibilidad' => 'disponible',
-            'comentarios' => $this->comentarios,
-        ]);
-
-        session()->flash('message', 'Mesa creada con éxito.');
-        $this->cerrarCreateModal();
-    }
-
-    // Actualizar mesa existente
+    
     public function update()
     {
         $this->validate([
-            'numero' => 'required',
             'capacidad' => 'required|numeric',
             'comentarios' => 'nullable|string',
         ]);
-
-        Mesa::find($this->mesaId)->update([
-            'numero_mesas' => $this->numero,
+    
+        Mesa::find($this->nro_mesa)->update([
             'cantidad_asientos' => $this->capacidad,
             'comentarios' => $this->comentarios,
         ]);
-
+    
         session()->flash('message', 'Mesa actualizada con éxito.');
         $this->cerrarEditModal();
     }
-
-    // Eliminar mesa
-    public function delete($id)
+    
+    public function delete($numero_mesas)
     {
-        Mesa::find($id)->delete();
+        Mesa::find($numero_mesas)->delete();
         session()->flash('message', 'Mesa eliminada con éxito.');
     }
+    
+
 }
-
-
 ?>

@@ -9,15 +9,15 @@ class Reserva extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['ccodigo_verificacion', 'dfecha', 'dhora'];
+    protected $fillable = [
+        'nnumero_reserva',
+        'ccodigo_verificacion',
+        'dfecha',
+        'dhora',
+        'duracion_reserva',
+        'estado'
+    ];
 
-    public function mesa()
-    {
-        return $this->belongsTo(Mesa::class, 'mesa_id');
-    }
+   
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
 }

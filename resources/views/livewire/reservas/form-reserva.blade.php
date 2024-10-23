@@ -1,10 +1,4 @@
 <div class="mb-3">
-    <label for="codigo_verificacion" class="form-label">Código Verificación</label>
-    <input type="text" class="form-control" id="codigo_verificacion" wire:model="ccodigo_verificacion" maxlength="6">
-    @error('codigo_verificacion') <span class="text-danger">{{ $message }}</span> @enderror
-</div>
-
-<div class="mb-3">
     <label for="fecha" class="form-label">Fecha</label>
     <input type="date" class="form-control" id="fecha" wire:model="dfecha">
     @error('fecha') <span class="text-danger">{{ $message }}</span> @enderror

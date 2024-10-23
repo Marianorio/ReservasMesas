@@ -2,7 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
- Route::get('/', function () {
+
+use App\Livewire\MesaComponent;
+use App\Livewire\Users;
+use App\Livewire\ReservaComponent;
+
+
+
+Route::get('/', function () {
      return view('welcome');
 });
 
@@ -41,4 +48,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/mesas', MesaComponent::class)->name('mesas.index');
+
+
+    Route::get('/reservas', ReservaComponent::class)->name('reservas');
+    Route::post('/reservas-insertar', [ReservaComponent::class, 'insertar']);
+    
 });
+

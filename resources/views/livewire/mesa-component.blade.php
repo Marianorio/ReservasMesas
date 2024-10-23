@@ -26,7 +26,6 @@
     <table class="table table-striped table-hover" id="tablaResenas">
         <thead class="table-dark">
             <tr>
-                <th>#</th>
                 <th>Número de Mesa</th>
                 <th>Cantidad de Asientos</th>
                 <th>Disponibilidad</th>
@@ -37,7 +36,6 @@
         <tbody>
             @foreach($mesas as $mesa)
                 <tr>
-                    <td>{{ $mesa->id }}</td>
                     <td>{{ $mesa->numero_mesas }}</td>
                     <td>{{ $mesa->cantidad_asientos }}</td>
                     <td>{{ $mesa->disponibilidad }}</td>
@@ -59,11 +57,6 @@
                                 </div>
                                 <div class="modal-body">
                                     <form>
-                                        <div class="mb-3">
-                                            <label for="numero_mesas" class="form-label">Número de Mesa</label>
-                                            <input type="text" class="form-control" wire:model="numero">
-                                            @error('numero') <span class="text-danger">{{ $message }}</span> @enderror
-                                        </div>
                                         <div class="mb-3">
                                             <label for="cantidad_asientos" class="form-label">Cantidad de Asientos</label>
                                             <input type="number" class="form-control" wire:model="capacidad">
@@ -101,11 +94,6 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="mb-3">
-                            <label for="numero_mesas" class="form-label">Número de Mesa</label>
-                            <input type="text" class="form-control" wire:model="numero">
-                            @error('numero') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
                         <div class="mb-3">
                             <label for="cantidad_asientos" class="form-label">Cantidad de Asientos</label>
                             <input type="number" class="form-control" wire:model="capacidad">
