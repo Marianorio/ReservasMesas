@@ -2,14 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Livewire\MesaComponent;
-
-use App\Livewire\ReservaComponent;
-
-
-Route::get('/mesas', MesaComponent::class)->name('mesas.index');
-
-
  Route::get('/', function () {
      return view('welcome');
 });
@@ -33,19 +25,20 @@ Route::get('/feedback-cliente', function () {
 
 
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/users', Users::class);
+});
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-
-    Route::get('/reservas', ReservaComponent::class)->name('reservas');
-    Route::post('/reservas-insertar', [ReservaComponent::class, 'insertar']);
-    
-
-
-
-
-
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });

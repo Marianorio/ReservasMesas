@@ -39,11 +39,10 @@
                         </a>
                     @endif
 
-                    @if (Route::has('register'))
+                    
                         <a href="{{ route('register') }}" class="btn btn-outline-primary">
-                            Register
+                            Registrar
                         </a>
-                    @endif
 
                     <button type="submit" class="btn btn-primary ms-3">
                         {{ __('Log in') }}
