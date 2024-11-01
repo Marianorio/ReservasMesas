@@ -1,32 +1,37 @@
+<div class="container my-5">
+    <div class="mb-4">
+    
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h1 class="display-4">Panel - Usuarios</h1>
+        </div>
+    </div>
 
-
-<div class="container mx-auto my-10">
-    <div class="mb-5">
-        <h4 class="text-gray-600 text-lg font-semibold">Gestion de Usuarios</h4>
-        <div class="shadow-md rounded-lg overflow-hidden mt-3">
-
-          <!--<button wire:/>*click="register" */class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">Nuevo Usuario</button> -->
+        <div class="table-responsive shadow-sm rounded-lg mt-3">
+            <!-- Botón para añadir nuevo usuario (puedes descomentarlo si tienes la lógica para añadir usuarios) -->
+            <!-- 
+            <button wire:click="register" class="btn btn-success mb-3">Nuevo Usuario</button>
+            -->
             
-
-            <table class="min-w-full table-auto">
-                <thead class="bg-gray-800 text-white">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
                     <tr>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Usuario</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Nombre</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Correo</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Acciones</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col" class="text-center">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td class="px-6 py-4">{{$user->id}}</td>
-                            <td class="px-6 py-4">{{$user->name}}</td>
-                            <td class="px-6 py-4">{{$user->email}}</td>
-                            <td class="border px-4 py-2 text-center">
-                              <!--<button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>-->
-                              <button wire:click="borrar({{$user->id}})" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4">Eliminar</button>
-                          </td>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td class="text-center">
+                                <!-- Botón para eliminar usuario -->
+                                <button wire:click="borrar({{ $user->id }})" class="btn btn-danger">Eliminar</button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -34,4 +39,3 @@
         </div>
     </div>
 </div>
-

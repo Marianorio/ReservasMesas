@@ -24,4 +24,8 @@ class Users extends Component
     {
         User::find($id)->delete();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cristian

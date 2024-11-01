@@ -13,10 +13,10 @@
     <!-- Filtros de Búsqueda -->
     <div class="row mb-4">
         <div class="col-md-6 mb-2">
-            <input type="text" id="searchInput" class="form-control" placeholder="Buscar por cliente...">
+            <input type="text" id="inputBusqueda" class="form-control" placeholder="Buscar por cliente...">
         </div>
         <div class="col-md-6 mb-2">
-            <select id="ratingFilter" class="form-select">
+            <select id="filtroCalificacion" class="form-select">
                 <option value="">Filtrar por Calificación</option>
                 <option value="5">⭐⭐⭐⭐⭐</option>
                 <option value="4">⭐⭐⭐⭐</option>
@@ -30,7 +30,7 @@
     <!-- Tabla de Reseñas -->
     <div class="row">
         <div class="col-12">
-            <table class="table table-striped table-hover" id="reviewsTable">
+            <table class="table table-striped table-hover" id="tablaResenas">
                 <thead class="table-dark">
                     <tr>
                         <th>Cliente</th>
@@ -75,5 +75,8 @@
     </div>
 
 </div>
+
+<script src="{{ asset('js/feedback.js') }}"></script>
+
 
 @include('layouts.includes.footer')

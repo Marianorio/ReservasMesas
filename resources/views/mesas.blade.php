@@ -13,10 +13,10 @@
     <div class="row justify-content-center mb-4">
         <div class="col-auto">
             <div class="btn-group" role="group">
-                <button class="btn btn-outline-primary">Todas</button>
-                <button class="btn btn-outline-success">Disponibles</button>
-                <button class="btn btn-outline-danger">Ocupadas</button>
-                <button class="btn btn-outline-warning">Reservada</button>
+                <button class="btn btn-outline-primary" onclick="filtrarMesas('todas')">Todas</button>
+                <button class="btn btn-outline-success" onclick="filtrarMesas('disponible')">Disponibles</button>
+                <button class="btn btn-outline-danger" onclick="filtrarMesas('ocupada')">Ocupadas</button>
+                <button class="btn btn-outline-warning" onclick="filtrarMesas('reservada')">Reservada</button>
             </div>
         </div>
     </div>
@@ -24,8 +24,8 @@
     <!-- Mesas -->
     <div class="row text-center">
         <!-- Mesa 001 (Disponible) -->
-        <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card mesa shadow-sm border-0">
+        <div class="mesa col-md-3 col-sm-6 mb-4" data-estado="disponible">
+            <div class="card shadow-sm border-0">
                 <div class="card-header bg-success text-white">
                     <h5 class="card-title mb-0">Mesa 001</h5>
                 </div>
@@ -40,8 +40,8 @@
         </div>
 
         <!-- Mesa 002 (Ocupada) -->
-        <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card mesa shadow-sm border-0">
+        <div class="mesa col-md-3 col-sm-6 mb-4" data-estado="ocupada">
+            <div class="card shadow-sm border-0">
                 <div class="card-header bg-danger text-white">
                     <h5 class="card-title mb-0">Mesa 002</h5>
                 </div>
@@ -56,8 +56,8 @@
         </div>
 
         <!-- Mesa 003 (Reservada) -->
-        <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card mesa shadow-sm border-0">
+        <div class="mesa col-md-3 col-sm-6 mb-4" data-estado="reservada">
+            <div class="card shadow-sm border-0">
                 <div class="card-header bg-warning text-white">
                     <h5 class="card-title mb-0">Mesa 003</h5>
                 </div>
@@ -74,5 +74,9 @@
         <!-- Más mesas... -->
     </div>
 </div>
+
+
+<script src="{{ asset('js/filtro-mesas.js') }}"></script>
+
 
 @include('layouts.includes.footer')
