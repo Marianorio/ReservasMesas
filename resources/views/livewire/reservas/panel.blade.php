@@ -1,6 +1,3 @@
-@include('layouts.includes.head')
-@include('layouts.includes.navbar')
-
 <div class="container my-5">
     <!-- Panel de control header -->
     <div class="row">
@@ -75,4 +72,3 @@
     </div>
 </div>
 
-@include('layouts.includes.footer')

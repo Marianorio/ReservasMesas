@@ -13,9 +13,6 @@ Route::get('/', function () {
      return view('welcome');
 });
 
-Route::get('/panel', function () {
-    return view('panel');
-});
 
 Route::get('/feedback', function () {
     return view('feedback');
@@ -50,9 +47,10 @@ Route::middleware([
     })->name('dashboard');
     Route::get('/mesas', MesaComponent::class)->name('mesas.index');
 
-
     Route::get('/reservas', ReservaComponent::class)->name('reservas');
-    //Route::post('/reservas-insertar', [ReservaComponent::class, 'insertar']);
+    Route::get('/panel', function () {
+        return view('panel');
+    })->name('panel');
     
 });
 

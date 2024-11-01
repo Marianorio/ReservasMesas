@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/panel">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="">Inicio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/mesas">Mesas</a>
@@ -17,7 +17,7 @@
             Reservas
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="">Reservar</a></li>
+            <li><a class="dropdown-item" href="/panel-reservar">Reservar</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/reservas">Ver reservas</a></li>
           </ul>
