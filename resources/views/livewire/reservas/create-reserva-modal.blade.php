@@ -6,7 +6,7 @@
                 <button type="button" wire:click="cerrarCreateModal" class="btn-close"></button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="insertar">
+                <form wire:submit="insertar">
                     <!-- Campos del formulario -->
                     @include('livewire.reservas.form-reserva')
                     <button type="submit" class="btn btn-primary">Guardar</button>

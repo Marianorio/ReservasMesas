@@ -52,7 +52,7 @@ Route::middleware([
 
 
     Route::get('/reservas', ReservaComponent::class)->name('reservas');
-    Route::post('/reservas-insertar', [ReservaComponent::class, 'insertar']);
+    //Route::post('/reservas-insertar', [ReservaComponent::class, 'insertar']);
     
 });
 

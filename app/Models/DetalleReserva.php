@@ -1,3 +1,4 @@
+<?php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,25 +15,25 @@ class DetalleReserva extends Model
     protected $fillable = [
         'nnumero_reserva',
         'id_usuario',
-        'id_mesa',
+        'numero_mesa',
         'cantidad_asientos',
     ];
 
-    // Relación con el modelo Reserva (muchos detalles para una reserva)
-    public function reserva()
+    // Relación con DetalleReserva (una reserva tiene un detalle)
+    /* public function reserva()
     {
         return $this->belongsTo(Reserva::class, 'nnumero_reserva', 'nnumero_reserva');
-    }
+    } */
 
-    // Relación con el modelo Usuario
-    public function usuario()
-    {
-        return $this->belongsTo(User::class, 'id_usuario', 'id');
-    }
-
-    // Relación con el modelo Mesa
+    // Relación con Mesa a través de DetalleReserva
     public function mesa()
     {
-        return $this->belongsTo(Mesa::class, 'id_mesa', 'numero_mesas');
+        return $this->belongsTo(Mesa::class, 'numero_mesa'); // Asegúrate de que los nombres de columnas sean correctos
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
     }
 }

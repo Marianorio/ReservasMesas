@@ -9,10 +9,11 @@ class Mesa extends Model
     // Definir la clave primaria correcta
     protected $primaryKey = 'numero_mesas';
     public $incrementing = true;
-    protected $keyType = 'bigint';
+    
 
     // Atributos permitidos para asignación masiva
     protected $fillable = [
+        'numero_mesas',
         'cantidad_asientos',
         'disponibilidad',
         'reservas_activas',

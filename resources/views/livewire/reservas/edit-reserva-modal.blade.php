@@ -6,7 +6,7 @@
                 <button type="button" wire:click="cerrarEditModal" class="btn-close"></button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="update">
+                <form wire:submit.prevent="actualizar">
                     <!-- Campos del formulario -->
                     @include('livewire.reservas.form-reserva')
                     <button type="submit" class="btn btn-primary">Actualizar</button>
