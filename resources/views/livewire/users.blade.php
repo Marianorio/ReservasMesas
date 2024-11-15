@@ -14,6 +14,7 @@
         <!-- Tabla de todos los usuarios -->
         <div id="usuariosTable" class="table-responsive shadow-sm rounded-lg">
             <h5 class="text-center">Todos los Usuarios</h5>
+            <button wire:click="agregarUsuario()" class="btn btn-success mb-2">Agregar Usuario</button>
             <table class="table table-striped table-bordered">
                 <thead class="table-dark">
                     <tr>
@@ -49,12 +50,14 @@
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Correo</th>
+                        <th scope="col">Rol</th>
                         <th scope="col" class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     
                         <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
