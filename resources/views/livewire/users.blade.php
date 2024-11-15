@@ -74,6 +74,9 @@
     </div>
 </div>
 
+
+
+<!-- ---------------- Script para cambiar las tablas ----------------  -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const usuariosTable = document.getElementById("usuariosTable");
