@@ -139,7 +139,7 @@ class ReservaComponent extends Component
     }
     public function actualizar()
     {
-        dd($this->ccodigo_verificacion, $this->dfecha, $this->dhora, $this->estado, $this->id_usuario, $this->numero_mesa, $this->cantidad_asientos);
+        //dd($this->ccodigo_verificacion, $this->dfecha, $this->dhora, $this->estado, $this->id_usuario, $this->numero_mesa, $this->cantidad_asientos);
 
         // Validación
         $this->validate([
