@@ -19,6 +19,10 @@ class ReservaComponent extends Component
     $isCreateModalOpen = false,
     $isEditModalOpen = false;
 
+    public $paso = 1;
+
+    public $fecha_hora;
+
     function generarCodigoVerificacion($longitud = 6)
     {
         // Definir el conjunto de caracteres que deseas utilizar
@@ -34,6 +38,22 @@ class ReservaComponent extends Component
         return view('livewire.reservas.reserva-component')->layout('layouts.app');
     }
 
+    public function siguientePaso()
+    {
+        $this->validate([
+            'cantidad_asientos' => 'required|integer|min:1',
+            'numero_mesa' => 'required|exists:mesas,numero_mesas',
+            'id_usuario' => 'required|exists:users,id',
+        ]);
+
+        $this->paso = 2;
+        $this->dispatch('paso2');
+    }
+
+    public function pasoAnterior()
+    {
+        $this->paso = 1;
+    }
 
     // Función para abrir el modal de creación
     public function abrirCreateModal()
@@ -76,15 +96,21 @@ class ReservaComponent extends Component
     }
     private function resetInputFields()
     {
-        // Resetea campos que estés usando
+        $this->ccodigo_verificacion = '';
+        $this->dfecha = '';
+        $this->dhora = '';
+        $this->duracion_reserva = 50;
+        $this->estado = 'pendiente';
+        $this->id_usuario = '';
+        $this->numero_mesa = '';
+        $this->cantidad_asientos = '';
+        $this->paso = 1;
     }
     public function insertar()
     {
-
         // Validación
         $this->validate([
-            'dfecha' => 'required|date',
-            'dhora' => 'required|date_format:H:i',
+            'fecha_hora' => 'required|date_format:Y-m-d H:i',
             'duracion_reserva' => 'nullable|integer',
             'estado' => 'required|in:pendiente,confirmada,cancelada',
             'numero_mesa' => 'required|exists:mesas,numero_mesas',
@@ -92,9 +118,12 @@ class ReservaComponent extends Component
             'cantidad_asientos' => 'required|integer|min:1',
         ]);
 
-        //dd($this->ccodigo_verificacion, $this->dfecha, $this->dhora, $this->estado, $this->id_usuario, $this->numero_mesa, $this->cantidad_asientos);
+        // Separar fecha_hora en fecha y hora
+        $fechaHora = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $this->fecha_hora);
+        $this->dfecha = $fechaHora->toDateString();
+        $this->dhora = $fechaHora->format('H:i');
 
-        // Validar que no haya una reserva en la misma fecha para la misma mesa
+        // Validar reserva existente
         $reservaExistente = Reserva::where('dfecha', $this->dfecha)
             ->whereHas('detalleReserva', function ($query) {
                 $query->where('numero_mesa', $this->numero_mesa);
@@ -106,10 +135,9 @@ class ReservaComponent extends Component
             session()->flash('error', 'Ya existe una reserva para esta mesa en la fecha seleccionada.');
             return;
         }
-        // Generar el código de verificación
 
+        // Generar código y crear reserva
         $this->ccodigo_verificacion = $this->generarCodigoVerificacion();
-
 
         // Crear la reserva
         $reserva = Reserva::create([
@@ -120,7 +148,6 @@ class ReservaComponent extends Component
             'estado' => $this->estado
         ]);
 
-
         // Crear el detalle de la reserva
         DetalleReserva::create([
             'nnumero_reserva' => $reserva->nnumero_reserva,
@@ -130,12 +157,11 @@ class ReservaComponent extends Component
         ]);
 
         // Mensaje de éxito
-
-        session()->flash('message', 'Reserva y su detalle creados exitosamente.');
+        session()->flash('message', 'Reserva creada exitosamente.');
 
         // Cerrar modal o limpiar los campos
+        $this->resetInputFields();
         $this->cerrarCreateModal();
-
     }
     public function actualizar()
     {
@@ -185,5 +211,20 @@ class ReservaComponent extends Component
     {
         Reserva::find($nnumero_reserva)->delete();
         session()->flash('message', 'Reserva eliminada con éxito.');
+    }
+
+    public function updatedPaso($value)
+    {
+        if ($value === 2) {
+            $this->dispatch('initDatePicker');
+        }
+    }
+
+    protected function rules()
+    {
+        return [
+            'fecha_hora' => 'required|date_format:Y-m-d H:i',
+            // ... otras reglas de validación
+        ];
     }
 }

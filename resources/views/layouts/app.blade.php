@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    @include('layouts.includes.head') <!-- Incluye aquí el head -->
+    @include('layouts.includes.head')
+    
     @livewireStyles
 </head>
 <body class="font-sans antialiased">
@@ -28,6 +29,10 @@
     @stack('modals')
 
     @livewireScripts
-    @include('layouts.includes.footer') <!-- Incluye aquí el footer -->
+    
+    <!-- Agregar el script de app.js -->
+    @include('layouts.includes.footer')
+
+    
 </body>
 </html>
