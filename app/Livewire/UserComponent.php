@@ -13,7 +13,7 @@ class UserComponent extends Component
     public function render()
     {
         $this->users = User::all();
-        return view('livewire.user.users');
+        return view('livewire.users.users');
     }
 
     public function agregarUsuario()
