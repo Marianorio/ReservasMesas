@@ -14,14 +14,14 @@
         <!-- Tabla de todos los usuarios -->
         <div id="usuariosTable" class="table-responsive shadow-sm rounded-lg">
             <h5 class="text-center">Todos los Usuarios</h5>
-            <button wire:click="agregarUsuario()" class="btn btn-success mb-2">Agregar Usuario</button>
+            <button wire:click="$emit('openModal', 'createUserModal')" class="btn btn-success mb-2">Agregar Usuario</button>
             <table class="table table-striped table-bordered">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Correo</th>
-                        <th scope="col" class="text-center">Acciones</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td class="text-center">
-                                <button wire:click="borrar()" class="btn btn-primary">Modificar</button>
+                                <button wire:click="editarUsuario({{ $user->id }})" class="btn btn-primary">Modificar</button>
                                 <button wire:click="borrar({{ $user->id }})" class="btn btn-danger">Eliminar</button>
                             </td>
                         </tr>
@@ -39,6 +39,11 @@
                 </tbody>
             </table>
         </div>
+    
+        <!-- Incluye los modales -->
+        @include('livewire.users.create-user-modal')
+        @include('livewire.users.edit-user-modal')
+    </div>
 
         <!-- Tabla de empleados -->
         <div id="empleadosTable" class="table-responsive shadow-sm rounded-lg d-none">
@@ -74,6 +79,17 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener("livewire:load", () => {
+        Livewire.on('openModal', (id) => {
+            $(`#${id}`).modal('show');
+        });
+
+        Livewire.on('closeModal', (id) => {
+            $(`#${id}`).modal('hide');
+        });
+    });
+</script>
 
 
 <!-- ---------------- Script para cambiar las tablas ----------------  -->
