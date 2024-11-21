@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\MesaComponent;
-use App\Livewire\Users;
+use App\Livewire\UserComponent;
 
 Route::get('/mesas', MesaComponent::class)->name('mesas.index');
 use App\Livewire\Usuarios;
@@ -29,7 +29,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/users', Users::class);
+    Route::get('/users', UserComponent::class);
 });
 
 
