@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
@@ -8,23 +8,28 @@ use App\Models\User;
 class UserComponent extends Component
 {
     public $users, $name, $email, $password, $selectedUserId;
+    public $isCreateModalOpen = false, $isEditModalOpen = false;
 
     public function render()
     {
         $this->users = User::all();
-        return view('livewire.users.users')->layout('layouts.app');
-
+        return view('livewire.user.users');
     }
 
     public function agregarUsuario()
     {
-        $this->reset(['name', 'email', 'password', 'selectedUserId']);
+        $this->resetInputFields();
+        $this->isCreateModalOpen = true;
         $this->emit('openModal', 'createUserModal');
     }
 
     public function guardarUsuario()
     {
-        $this->validate();
+        $this->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+        ]);
 
         User::create([
             'name' => $this->name,
@@ -32,18 +37,21 @@ class UserComponent extends Component
             'password' => bcrypt($this->password),
         ]);
 
+        $this->resetInputFields();
         $this->emit('closeModal', 'createUserModal');
+        session()->flash('message', 'Usuario agregado exitosamente.');
     }
 
     public function editarUsuario($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         $this->selectedUserId = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
         $this->password = ''; // Opcional
 
+        $this->isEditModalOpen = true;
         $this->emit('openModal', 'editUserModal');
     }
 
@@ -62,11 +70,19 @@ class UserComponent extends Component
             'password' => $this->password ? bcrypt($this->password) : $user->password,
         ]);
 
+        $this->resetInputFields();
         $this->emit('closeModal', 'editUserModal');
+        session()->flash('message', 'Usuario actualizado exitosamente.');
     }
 
     public function borrar($id)
     {
-        User::find($id)->delete();
+        User::findOrFail($id)->delete();
+        session()->flash('message', 'Usuario eliminado exitosamente.');
+    }
+
+    private function resetInputFields()
+    {
+        $this->reset(['name', 'email', 'password', 'selectedUserId']);
     }
 }

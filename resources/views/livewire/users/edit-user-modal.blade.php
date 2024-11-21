@@ -10,7 +10,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" wire:click="actualizarUsuario">Actualizar</button>
+                <button type="button" class="btn btn-success" wire:click="actualizarUsuario">Actualizar</button>
             </div>
         </div>
     </div>
