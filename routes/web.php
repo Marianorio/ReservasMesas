@@ -1,31 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-
 use App\Livewire\MesaComponent;
 use App\Livewire\Users;
+use App\Livewire\FeedbackComponent;
 use App\Livewire\ReservaComponent;
 
 
 
-Route::get('/', function () {
+
+use App\Livewire\Usuarios;
+
+ Route::get('/', function () {
      return view('welcome');
 });
 
 
-Route::get('/feedback', function () {
-    return view('feedback');
-});
-Route::get('/panel', function (){
-    return view(view: 'panel');
-})->name('panel');
 
+Route::get('/feedback', FeedbackComponent::class)->name('feedback.index');
 Route::get('/feedback-cliente', function () {
     return view('feedback-cliente');
 });
-
-
 
 
 
