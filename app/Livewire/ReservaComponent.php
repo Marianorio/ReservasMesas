@@ -15,16 +15,13 @@ class ReservaComponent extends Component
     $estado = 'pendiente';
     public $id_usuario, $numero_mesa, $cantidad_asientos;
 
-    public $numeroReserva, $reservas,
+    public $reservaId, $reservas,
     $isCreateModalOpen = false,
     $isEditModalOpen = false;
 
     function generarCodigoVerificacion($longitud = 6)
     {
-        // Definir el conjunto de caracteres que deseas utilizar
         $caracteres = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-        // Mezclar los caracteres y seleccionar un subconjunto aleatorio
         return substr(str_shuffle($caracteres), 0, $longitud);
     }
 
@@ -34,26 +31,23 @@ class ReservaComponent extends Component
         return view('livewire.reservas.reserva-component')->layout('layouts.app');
     }
 
-
-    // Función para abrir el modal de creación
     public function abrirCreateModal()
     {
         $this->resetInputFields();
         $this->isCreateModalOpen = true;
     }
+
     public function abrirEditModal($nnumero_reserva)
     {
-        $this->reservaId = $nnumero_reserva; // Asignar la reserva seleccionada
-        $reserva = Reserva::find($nnumero_reserva); // Obtener la reserva
+        $this->reservaId = $nnumero_reserva;
+        $reserva = Reserva::find($nnumero_reserva);
         if ($reserva) {
-            // Cargar los datos en las propiedades
             $this->ccodigo_verificacion = $reserva->ccodigo_verificacion;
             $this->dfecha = $reserva->dfecha;
             $this->dhora = $reserva->dhora;
             $this->duracion_reserva = $reserva->duracion_reserva;
             $this->estado = $reserva->estado;
 
-            // Cargar detalles si es necesario
             $detalle = DetalleReserva::where('nnumero_reserva', $nnumero_reserva)->first();
             if ($detalle) {
                 $this->id_usuario = $detalle->id_usuario;
@@ -61,27 +55,36 @@ class ReservaComponent extends Component
                 $this->cantidad_asientos = $detalle->cantidad_asientos;
             }
         }
-        $this->isEditModalOpen = true; // Abrir el modal
+        $this->isEditModalOpen = true;
     }
-    // Función para cerrar el modal de creación
+
     public function cerrarCreateModal()
     {
         $this->resetInputFields();
         $this->isCreateModalOpen = false;
     }
+
     public function cerrarEditModal()
     {
         $this->resetInputFields();
         $this->isEditModalOpen = false;
     }
+
     private function resetInputFields()
     {
-        // Resetea campos que estés usando
+        $this->ccodigo_verificacion = '';
+        $this->dfecha = '';
+        $this->dhora = '';
+        $this->duracion_reserva = 50;
+        $this->estado = 'pendiente';
+        $this->id_usuario = '';
+        $this->numero_mesa = '';
+        $this->cantidad_asientos = '';
+        $this->reservaId = null;
     }
+
     public function insertar()
     {
-
-        // Validación
         $this->validate([
             'dfecha' => 'required|date',
             'dhora' => 'required|date_format:H:i',
@@ -92,9 +95,6 @@ class ReservaComponent extends Component
             'cantidad_asientos' => 'required|integer|min:1',
         ]);
 
-        //dd($this->ccodigo_verificacion, $this->dfecha, $this->dhora, $this->estado, $this->id_usuario, $this->numero_mesa, $this->cantidad_asientos);
-
-        // Validar que no haya una reserva en la misma fecha para la misma mesa
         $reservaExistente = Reserva::where('dfecha', $this->dfecha)
             ->whereHas('detalleReserva', function ($query) {
                 $query->where('numero_mesa', $this->numero_mesa);
@@ -106,12 +106,9 @@ class ReservaComponent extends Component
             session()->flash('error', 'Ya existe una reserva para esta mesa en la fecha seleccionada.');
             return;
         }
-        // Generar el código de verificación
 
         $this->ccodigo_verificacion = $this->generarCodigoVerificacion();
 
-
-        // Crear la reserva
         $reserva = Reserva::create([
             'ccodigo_verificacion' => $this->ccodigo_verificacion,
             'dfecha' => $this->dfecha,
@@ -120,8 +117,6 @@ class ReservaComponent extends Component
             'estado' => $this->estado
         ]);
 
-
-        // Crear el detalle de la reserva
         DetalleReserva::create([
             'nnumero_reserva' => $reserva->nnumero_reserva,
             'id_usuario' => $this->id_usuario,
@@ -129,19 +124,12 @@ class ReservaComponent extends Component
             'cantidad_asientos' => $this->cantidad_asientos,
         ]);
 
-        // Mensaje de éxito
-
         session()->flash('message', 'Reserva y su detalle creados exitosamente.');
-
-        // Cerrar modal o limpiar los campos
         $this->cerrarCreateModal();
-
     }
+
     public function actualizar()
     {
-        //dd($this->ccodigo_verificacion, $this->dfecha, $this->dhora, $this->estado, $this->id_usuario, $this->numero_mesa, $this->cantidad_asientos);
-
-        // Validación
         $this->validate([
             'dfecha' => 'required|date',
             'dhora' => 'required|date_format:H:i',
@@ -152,8 +140,7 @@ class ReservaComponent extends Component
             'cantidad_asientos' => 'required|integer|min:1',
         ]);
 
-        // Actualizar la reserva
-        $reserva = Reserva::find($this->numeroReserva);
+        $reserva = Reserva::find($this->reservaId);
         if ($reserva) {
             $reserva->update([
                 'ccodigo_verificacion' => $this->ccodigo_verificacion,
@@ -162,23 +149,19 @@ class ReservaComponent extends Component
                 'duracion_reserva' => $this->duracion_reserva,
                 'estado' => $this->estado,
             ]);
+
+            $detalle = DetalleReserva::where('nnumero_reserva', $this->reservaId)->first();
+            if ($detalle) {
+                $detalle->update([
+                    'id_usuario' => $this->id_usuario,
+                    'numero_mesa' => $this->numero_mesa,
+                    'cantidad_asientos' => $this->cantidad_asientos,
+                ]);
+            }
+
+            session()->flash('message', 'Reserva actualizada con éxito.');
+            $this->cerrarEditModal();
         }
-
-        // Actualizar el detalle de la reserva
-        $detalle = DetalleReserva::where('nnumero_reserva', $this->reservaId)->first();
-        if ($detalle) {
-            $detalle->update([
-                'id_usuario' => $this->id_usuario,
-                'numero_mesa' => $this->numero_mesa,
-                'cantidad_asientos' => $this->cantidad_asientos,
-            ]);
-        }
-
-        // Mensaje de éxito
-        session()->flash('message', 'Reserva actualizada con éxito.');
-
-        // Cerrar el modal
-        $this->cerrarEditModal();
     }
 
     public function eliminar($nnumero_reserva)

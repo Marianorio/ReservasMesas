@@ -43,7 +43,7 @@
                             {{ $mesa->disponibilidad }}
                         </span>
                     </td>
-                    <td>{{ $mesa->comentario }}</td>
+                    <td>{{ $mesa->comentarios }}</td>
                     <td>
                         <button class="btn btn-warning btn-sm" wire:click="abrirEditModal({{ $mesa->numero_mesas }})">
                             <i class="fas fa-edit"></i> Editar

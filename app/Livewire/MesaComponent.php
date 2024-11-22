@@ -93,7 +93,7 @@ class MesaComponent extends Component
             'numero_mesas' => $nuevoNumero,
             'cantidad_asientos' => $this->cantidad_asientos,
             'disponibilidad' => 'Disponible',
-            'comentario' => $this->comentario,
+            'comentarios' => $this->comentario,
         ]);
 
         session()->flash('message', 'Mesa creada con éxito.');
@@ -114,7 +114,7 @@ class MesaComponent extends Component
         $mesa->update([
             'cantidad_asientos' => $this->cantidad_asientos,
             'disponibilidad' => $this->disponibilidad,
-            'comentario' => $this->comentario,
+            'comentarios' => $this->comentario,
         ]);
 
         session()->flash('message', 'Mesa actualizada con éxito.');
