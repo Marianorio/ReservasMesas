@@ -1,4 +1,4 @@
-@include('layouts.includes.head')
+f@include('layouts.includes.head')
 @include('layouts.includes.navbar')
 
 <div class="container my-5">
